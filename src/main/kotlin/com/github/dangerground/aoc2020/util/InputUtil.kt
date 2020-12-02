@@ -7,18 +7,20 @@ class InputUtil {
     companion object {
 
         @JvmStatic
-        fun readFileForDay(day: Int): String {
+        fun readInputForDayAsStringList(day: Int): List<String> {
             val name = "input$day.txt"
 
             val resource = this::class.java.classLoader.getResource(name)
             val file = resource.file
 
-            return File(file).readText()
+            return File(file).readText().lines()
         }
 
         @JvmStatic
         fun readInputForDayAsIntList(day: Int): List<Int> {
-            return readFileForDay(day).lines().map { s -> s.toInt() }.toList()
+            return readInputForDayAsStringList(day)
+                    .map { s -> s.toInt() }
+                    .toList()
         }
     }
 }
