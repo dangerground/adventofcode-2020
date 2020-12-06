@@ -62,8 +62,8 @@ fun main() {
     val day2 = Day2()
 
     // part 1
-    //val part1 = input.count { day2.isMatchingByCount(it) }
-    //println("result part 1: $part1")
+    val part1 = input.count { day2.isMatchingByCount(it) }
+    println("result part 1: $part1")
 
     // part2
     val part2 = input.count { day2.isMatchingByPosition(it) }

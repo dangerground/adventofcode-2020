@@ -46,10 +46,10 @@ fun main() {
     val input = DayInput.asIntList(1)
 
     // part 1
-//    val result = day1.getMultipliedIntermediateOfTwo(input, 2020)
-//    println("day1 result part1: $result")
+    val part1 = day1.getMultipliedIntermediateOfTwo(input, 2020)
+    println("result part1: $part1")
 
     // part 2
-    val result = day1.getMultipliedIntermediateOfThree(input, 2020)
-    println("day1 result part2: $result")
+    val part2 = day1.getMultipliedIntermediateOfThree(input, 2020)
+    println("result part2: $part2")
 }

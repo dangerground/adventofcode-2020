@@ -47,5 +47,15 @@ class DayInput {
                     .map { s -> s.toInt() }
                     .toList()
         }
+
+        @JvmStatic
+        fun asWorld(day: Int): World {
+            val name = "input$day.txt"
+
+            val resource = this::class.java.classLoader.getResource(name)
+            val file = resource.file
+
+            return World(File(file).readText().lines())
+        }
     }
 }

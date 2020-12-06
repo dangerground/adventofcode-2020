@@ -1,5 +1,6 @@
 package com.github.dangerground.aoc2020
 
+import com.github.dangerground.aoc2020.util.World
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
@@ -23,7 +24,7 @@ class Day3Test extends Specification {
         """.stripIndent().trim().lines().collect(Collectors.toList())
 
     @Subject
-    Day3 testSubject = new Day3(EXAMPLE_INPUT)
+    Day3 testSubject = new Day3(new World(EXAMPLE_INPUT))
 
     @Unroll
     def "test is tree (#row, #column) = #isTree"() {
@@ -40,7 +41,7 @@ class Day3Test extends Specification {
     }
 
     @Unroll
-    def "test count for input #dirction = #expected"() {
+    def "test count for input #direction = #expected"() {
         when:
         def result = testSubject.countTrees(direction)
 
@@ -48,7 +49,7 @@ class Day3Test extends Specification {
         result == expected
 
         where:
-        direction | expected
+        direction           | expected
         new Direction(1, 1) | 2
         new Direction(1, 3) | 7
         new Direction(1, 5) | 3
