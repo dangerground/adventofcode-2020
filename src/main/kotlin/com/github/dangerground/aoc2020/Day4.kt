@@ -21,12 +21,12 @@ class Passport(lines: List<String>) {
 
     init {
         lines.joinToString(" ")
-                .trim()
-                .split(Regex.fromLiteral(" "))
-                .map { it.split(":") }
-                .forEach {
-                    fields[it[0]] = it[1]
-                }
+            .trim()
+            .split(Regex.fromLiteral(" "))
+            .map { it.split(":") }
+            .forEach {
+                fields[it[0]] = it[1]
+            }
     }
 
     fun size() = fields.size
@@ -76,8 +76,6 @@ class Passport(lines: List<String>) {
             false
         }
     }
-
-
 }
 
 fun main() {

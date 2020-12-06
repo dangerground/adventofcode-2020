@@ -31,12 +31,12 @@ class Day1 {
     }
 
     fun getMultipliedIntermediateOfTwo(input: List<Int>, matching: Int) =
-            getTwoNumbersMatching(input, matching)
-                    .reduce { num1, num2 -> num1 * num2 }
+        getTwoNumbersMatching(input, matching)
+            .reduce { num1, num2 -> num1 * num2 }
 
     fun getMultipliedIntermediateOfThree(input: List<Int>, matching: Int) =
-            getThreeNumbersMatching(input, matching)
-                    .reduce { num1, num2 -> num1 * num2 }
+        getThreeNumbersMatching(input, matching)
+            .reduce { num1, num2 -> num1 * num2 }
 }
 
 fun main() {

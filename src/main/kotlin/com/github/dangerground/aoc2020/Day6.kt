@@ -25,16 +25,16 @@ class Day6(batches: List<List<String>>) {
 
 class Group(private val answers: List<String>) {
     private val totalQuestionsAnswered = mutableSetOf<Char>()
-    private val questionsAnsweredAmbiguously :Set<Char>
+    private val questionsAnsweredAmbiguously: Set<Char>
 
     init {
         val questionsAnswered = answers[0].toCharArray().toMutableSet()
-        answers.forEachIndexed {index, member ->
+        answers.forEachIndexed { index, member ->
             member.forEach { answer ->
                 this.totalQuestionsAnswered.add(answer)
             }
             if (index > 0) {
-                questionsAnswered.removeIf{ !member.contains(it) }
+                questionsAnswered.removeIf { !member.contains(it) }
             }
         }
         questionsAnsweredAmbiguously = questionsAnswered
@@ -45,8 +45,6 @@ class Group(private val answers: List<String>) {
     override fun toString(): String {
         return "Group(answers=$answers questionsAnsweredAmbiguously=${questionsAnsweredAmbiguously.size} ($questionsAnsweredAmbiguously))"
     }
-
-
 }
 
 

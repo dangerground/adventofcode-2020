@@ -11,10 +11,10 @@ class Day2 {
     }
 
     private fun getPasswordLength(pwAndPolicy: PasswordAndPolicy) =
-            pwAndPolicy.password.count { a -> a.toString() == pwAndPolicy.policy }
+        pwAndPolicy.password.count { a -> a.toString() == pwAndPolicy.policy }
 
     fun isMatchingByCount(line: String) =
-            isPasswordMatchingByCount(PasswordAndPolicy(line))
+        isPasswordMatchingByCount(PasswordAndPolicy(line))
 
     fun isPasswordMatchingByPosition(pwAndPolicy: PasswordAndPolicy): Boolean {
         var matched = false
@@ -35,15 +35,15 @@ class Day2 {
     }
 
     fun isMatchingByPosition(line: String) =
-            isPasswordMatchingByPosition(PasswordAndPolicy(line))
+        isPasswordMatchingByPosition(PasswordAndPolicy(line))
 }
 
 class PasswordAndPolicy(line: String) {
     private val inputSplitter = Regex("^(\\d+)-(\\d+) ([a-z]):( [a-z]+)$")
 
     val password: String
-    val num1:Int
-    val num2:Int
+    val num1: Int
+    val num2: Int
     val policy: String
 
     init {

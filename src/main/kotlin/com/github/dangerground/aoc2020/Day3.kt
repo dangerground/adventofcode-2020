@@ -10,10 +10,10 @@ class Day3(private val world: World) {
     }
 
     fun isTree(row: Int, column: Int) =
-            world.isChar(row, column, '#')
+        world.isChar(row, column, '#')
 
     fun countTrees(direction: Direction) =
-            (0 until world.getRowCount()).count { isTree(it * direction.down, it * direction.right) }
+        (0 until world.getRowCount()).count { isTree(it * direction.down, it * direction.right) }
 
     fun countDirectionsMultiplied(directions: List<Direction>): Long {
         var multiplied: Long = 1
@@ -37,11 +37,12 @@ fun main() {
 
     // part2
     val directions = listOf(
-            Direction(1, 1),
-            Direction(1, 3),
-            Direction(1, 5),
-            Direction(1, 7),
-            Direction(2, 1))
+        Direction(1, 1),
+        Direction(1, 3),
+        Direction(1, 5),
+        Direction(1, 7),
+        Direction(2, 1)
+    )
     val part2 = day3.countDirectionsMultiplied(directions)
     println("result part 2: $part2")
 }

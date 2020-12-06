@@ -14,8 +14,8 @@ class Day5(input: List<String>) {
         val seatIds = seats.map { it.getId() }
         val candidates = seatIds.filter { !seatIds.contains(it - 1) }.map { it - 1 }
         return seatIds.filter { candidates.contains(it + 1) && !seatIds.contains(it + 1) }
-                .map { it + 1 }
-                .first()
+            .map { it + 1 }
+            .first()
     }
 }
 
