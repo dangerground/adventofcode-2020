@@ -3,25 +3,8 @@ package com.github.dangerground.aoc2020
 import com.github.dangerground.aoc2020.util.InputUtil
 import java.lang.Exception
 
-class Day4(input: List<String>) {
-
-    val passports = mutableListOf<Passport>()
-
-    init {
-        val tmpList = mutableListOf<String>()
-        input.forEach {
-            if (it.isEmpty()) {
-                addToPassport(tmpList)
-            }
-            tmpList.add(it)
-        }
-        addToPassport(tmpList)
-    }
-
-    private fun addToPassport(tmpList: MutableList<String>) {
-        passports.add(Passport(tmpList))
-        tmpList.clear()
-    }
+class Day4(batches: List<List<String>>) {
+    var passports = batches.map { Passport(it) }
 
     fun countPassportsWithRequiredField() = passports.filter { it.hasRequiredFields() }.count()
     fun countValidPassports() = passports.filter { it.isValid() }.count()
@@ -29,8 +12,8 @@ class Day4(input: List<String>) {
 
 class Passport(lines: List<String>) {
 
-    val expectedFields = listOf("byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid")
-    val expectedEyeColor = listOf("amb", "blu", "brn", "gry", "grn", "hzl", "oth")
+    private val expectedFields = listOf("byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid")
+    private val expectedEyeColor = listOf("amb", "blu", "brn", "gry", "grn", "hzl", "oth")
 
     private val fields = HashMap<String, String>()
 
@@ -102,7 +85,7 @@ class Passport(lines: List<String>) {
 }
 
 fun main() {
-    val input = InputUtil.readInputForDayAsStringList(4)
+    val input = InputUtil.readBatchesForDayAsStringList(4)
     val day4 = Day4(input)
 
     // part 1

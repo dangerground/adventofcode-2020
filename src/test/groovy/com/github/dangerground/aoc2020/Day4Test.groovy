@@ -1,10 +1,13 @@
 package com.github.dangerground.aoc2020
 
+import com.github.dangerground.aoc2020.util.InputUtil
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
 import java.util.stream.Collectors
+
+import static com.github.dangerground.aoc2020.util.InputUtil.linesToBatches
 
 class Day4Test extends Specification {
 
@@ -25,7 +28,7 @@ class Day4Test extends Specification {
         """.stripIndent().trim().lines().collect(Collectors.toList())
 
     @Subject
-    Day4 testSubject = new Day4(EXAMPLE_INPUT)
+    Day4 testSubject = new Day4(linesToBatches(EXAMPLE_INPUT))
 
     @Unroll
     def "test is data stored as expected"() {
