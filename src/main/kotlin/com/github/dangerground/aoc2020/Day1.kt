@@ -13,7 +13,7 @@ class Day1 {
             }
         }
 
-        return listOf()
+        throw Exception("Unexpectd")
     }
 
     fun getThreeNumbersMatching(input: List<Int>, matching: Int): List<Int> {
@@ -27,7 +27,7 @@ class Day1 {
             }
         }
 
-        return listOf()
+        throw Exception("Unexpectd")
     }
 
     fun getMultipliedIntermediateOfTwo(input: List<Int>, matching: Int): Int {
