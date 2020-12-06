@@ -4,33 +4,25 @@ import com.github.dangerground.aoc2020.util.DayInput
 
 class Day2 {
 
-    fun getPolicyAndPassword(input: String): Parts {
-        val parts = input.split(":")
-        val policy = parts[0].split(" ")
-        val boundaries = policy[0].split("-")
-
-
-        return Parts(Policy(policy[1], boundaries[0].toInt(), boundaries[1].toInt()), parts[1])
+    fun isPasswordMatchingByCount(pwAndPolicy: PasswordAndPolicy): Boolean {
+        val count = getPasswordLength(pwAndPolicy)
+        return count >= pwAndPolicy.num1
+                && count <= pwAndPolicy.num2
     }
 
-    fun isPasswordMatchingByCount(password: String, policy: Policy): Boolean {
-        val count = password.count { a -> a.toString() == policy.char }
-        return count >= policy.min
-                && count <= policy.max
-    }
+    private fun getPasswordLength(pwAndPolicy: PasswordAndPolicy) =
+            pwAndPolicy.password.count { a -> a.toString() == pwAndPolicy.policy }
 
-    fun isMatchingByCount(input: String): Boolean {
-        val parts = getPolicyAndPassword(input)
-        return isPasswordMatchingByCount(parts.password, parts.policy)
-    }
+    fun isMatchingByCount(line: String) =
+            isPasswordMatchingByCount(PasswordAndPolicy(line))
 
-    fun isPasswordMatchingByPosition(password: String, policy: Policy): Boolean {
+    fun isPasswordMatchingByPosition(pwAndPolicy: PasswordAndPolicy): Boolean {
         var matched = false
         var lastPos = -1
 
         do {
-            lastPos = password.indexOf(policy.char, lastPos + 1)
-            if (lastPos == policy.min || lastPos == policy.max) {
+            lastPos = pwAndPolicy.password.indexOf(pwAndPolicy.policy, lastPos + 1)
+            if (lastPos == pwAndPolicy.num1 || lastPos == pwAndPolicy.num2) {
                 if (matched) {
                     return false
                 } else {
@@ -42,14 +34,28 @@ class Day2 {
         return matched
     }
 
-    fun isMatchingByPosition(input: String): Boolean {
-        val parts = getPolicyAndPassword(input)
-        return isPasswordMatchingByPosition(parts.password, parts.policy)
-    }
+    fun isMatchingByPosition(line: String) =
+            isPasswordMatchingByPosition(PasswordAndPolicy(line))
 }
 
-class Parts(val policy: Policy, val password: String)
-class Policy(val char: String, val min: Int, val max: Int)
+class PasswordAndPolicy(line: String) {
+    private val inputSplitter = Regex("^(\\d+)-(\\d+) ([a-z]):( [a-z]+)$")
+
+    val password: String
+    val num1:Int
+    val num2:Int
+    val policy: String
+
+    init {
+        val result = inputSplitter.matchEntire(line) ?: throw Exception("Invalid input")
+
+        num1 = result.groupValues[1].toInt()
+        num2 = result.groupValues[2].toInt()
+        policy = result.groupValues[3]
+
+        password = result.groupValues[4]
+    }
+}
 
 fun main() {
     val input = DayInput.asStringList(2)

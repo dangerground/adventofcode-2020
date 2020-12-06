@@ -11,30 +11,34 @@ class Day2Test extends Specification {
 
     def "test input splitter"() {
         when:
-        def result = testSubject.getPolicyAndPassword("1-3 a: abcde")
+        def result = new PasswordAndPolicy("1-3 a: abcde")
 
         then:
-        result.password == " abcde"
-        with(result.policy) {
-            getChar() == "a"
-            min == 1
-            max == 3
+        with(result) {
+            password == " abcde"
+            policy == "a"
+            num1 == 1
+            num2 == 3
         }
     }
 
+
     @Unroll
-    def "input [#policy] is matching [#password] by count"(Policy policy, String password, boolean isValid) {
+    def "input [#input] is matching [#isValid] by count"() {
+        given:
+        def pwAndPolicy = new PasswordAndPolicy(input)
+
         when:
-        def result = testSubject.isPasswordMatchingByCount(password, policy)
+        def result = testSubject.isPasswordMatchingByCount(pwAndPolicy)
 
         then:
         result == isValid
 
         where:
-        policy                | password     | isValid
-        new Policy("a", 1, 3) | " abcde"     | true
-        new Policy("b", 1, 3) | " cdefg"     | false
-        new Policy("c", 2, 9) | " ccccccccc" | true
+        input              | isValid
+        "1-3 a: abcde"     | true
+        "1-3 b: cdefg"     | false
+        "2-9 c: ccccccccc" | true
     }
 
     def "is input matching by count"() {
@@ -43,21 +47,24 @@ class Day2Test extends Specification {
     }
 
     @Unroll
-    def "input [#policy] is matching [#password] by position"(Policy policy, String password, boolean isValid) {
+    def "input [#input] is matching [#isValid] by position"() {
+        given:
+        def pwAndPolicy = new PasswordAndPolicy(input)
+
         when:
-        def result = testSubject.isPasswordMatchingByPosition(password, policy)
+        def result = testSubject.isPasswordMatchingByPosition(pwAndPolicy)
 
         then:
         result == isValid
 
         where:
-        policy                | password     | isValid
-        new Policy("a", 1, 3) | " abcde"     | true
-        new Policy("b", 1, 3) | " cdefg"     | false
-        new Policy("c", 2, 9) | " ccccccccc" | false
+        input              | isValid
+        "1-3 a: abcde"     | true
+        "1-3 b: cdefg"     | false
+        "2-9 c: ccccccccc" | false
 
         // custom test data
-        new Policy("a", 3, 5) | " aacaa"     | true
+        "3-5 a: aacaa"     | true
     }
 
     def "is input matching by position"() {
