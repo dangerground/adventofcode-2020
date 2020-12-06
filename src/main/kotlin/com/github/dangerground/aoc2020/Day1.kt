@@ -30,15 +30,13 @@ class Day1 {
         throw Exception("Unexpectd")
     }
 
-    fun getMultipliedIntermediateOfTwo(input: List<Int>, matching: Int): Int {
-        val numbers = getTwoNumbersMatching(input, matching)
-        return numbers[0] * numbers[1]
-    }
+    fun getMultipliedIntermediateOfTwo(input: List<Int>, matching: Int) =
+            getTwoNumbersMatching(input, matching)
+                    .reduce { num1, num2 -> num1 * num2 }
 
-    fun getMultipliedIntermediateOfThree(input: List<Int>, matching: Int): Int {
-        val numbers = getThreeNumbersMatching(input, matching)
-        return numbers[0] * numbers[1] * numbers[2]
-    }
+    fun getMultipliedIntermediateOfThree(input: List<Int>, matching: Int) =
+            getThreeNumbersMatching(input, matching)
+                    .reduce { num1, num2 -> num1 * num2 }
 }
 
 fun main() {
