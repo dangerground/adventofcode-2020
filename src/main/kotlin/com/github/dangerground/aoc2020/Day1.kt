@@ -1,6 +1,6 @@
 package com.github.dangerground.aoc2020
 
-import com.github.dangerground.aoc2020.util.InputUtil
+import com.github.dangerground.aoc2020.util.DayInput
 
 class Day1 {
 
@@ -43,7 +43,7 @@ class Day1 {
 
 fun main() {
     val day1 = Day1()
-    val input = InputUtil.readInputForDayAsIntList(1)
+    val input = DayInput.asIntList(1)
 
     // part 1
 //    val result = day1.getMultipliedIntermediateOfTwo(input, 2020)

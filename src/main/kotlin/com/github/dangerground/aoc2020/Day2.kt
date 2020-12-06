@@ -1,6 +1,6 @@
 package com.github.dangerground.aoc2020
 
-import com.github.dangerground.aoc2020.util.InputUtil
+import com.github.dangerground.aoc2020.util.DayInput
 
 class Day2 {
 
@@ -52,7 +52,7 @@ class Parts(val policy: Policy, val password: String)
 class Policy(val char: String, val min: Int, val max: Int)
 
 fun main() {
-    val input = InputUtil.readInputForDayAsStringList(2)
+    val input = DayInput.asStringList(2)
     val day2 = Day2()
 
     // part 1

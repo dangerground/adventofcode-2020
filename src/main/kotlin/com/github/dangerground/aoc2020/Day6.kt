@@ -1,6 +1,6 @@
 package com.github.dangerground.aoc2020
 
-import com.github.dangerground.aoc2020.util.InputUtil
+import com.github.dangerground.aoc2020.util.DayInput
 
 class Day6(batches: List<List<String>>) {
 
@@ -51,7 +51,7 @@ class Group(private val answers: List<String>) {
 
 
 fun main() {
-    val input = InputUtil.readBatchesForDayAsStringList(6)
+    val input = DayInput.batchesOfStringList(6)
     val day6 = Day6(input)
 
     // part 1

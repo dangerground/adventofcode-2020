@@ -1,13 +1,13 @@
 package com.github.dangerground.aoc2020
 
-import com.github.dangerground.aoc2020.util.InputUtil
+
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
 import java.util.stream.Collectors
 
-import static com.github.dangerground.aoc2020.util.InputUtil.linesToBatches
+import static com.github.dangerground.aoc2020.util.DayInput.linesToBatches
 
 class Day4Test extends Specification {
 

@@ -1,6 +1,6 @@
 package com.github.dangerground.aoc2020
 
-import com.github.dangerground.aoc2020.util.InputUtil
+import com.github.dangerground.aoc2020.util.DayInput
 import java.lang.Exception
 
 class Day4(batches: List<List<String>>) {
@@ -85,7 +85,7 @@ class Passport(lines: List<String>) {
 }
 
 fun main() {
-    val input = InputUtil.readBatchesForDayAsStringList(4)
+    val input = DayInput.batchesOfStringList(4)
     val day4 = Day4(input)
 
     // part 1

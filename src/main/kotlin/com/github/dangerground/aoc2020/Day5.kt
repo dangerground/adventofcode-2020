@@ -1,6 +1,6 @@
 package com.github.dangerground.aoc2020
 
-import com.github.dangerground.aoc2020.util.InputUtil
+import com.github.dangerground.aoc2020.util.DayInput
 
 class Day5(input: List<String>) {
     val seats = input.map { Seat(it) }
@@ -44,7 +44,7 @@ class Seat(input: String) {
 }
 
 fun main() {
-    val input = InputUtil.readInputForDayAsStringList(5)
+    val input = DayInput.asStringList(5)
     val day5 = Day5(input)
 
     // part 1

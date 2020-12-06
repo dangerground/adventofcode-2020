@@ -2,12 +2,12 @@ package com.github.dangerground.aoc2020.util
 
 import java.io.File
 
-class InputUtil {
+class DayInput {
 
     companion object {
 
         @JvmStatic
-        fun readInputForDayAsStringList(day: Int): List<String> {
+        fun asStringList(day: Int): List<String> {
             val name = "input$day.txt"
 
             val resource = this::class.java.classLoader.getResource(name)
@@ -17,8 +17,8 @@ class InputUtil {
         }
 
         @JvmStatic
-        fun readBatchesForDayAsStringList(day: Int): List<List<String>> {
-            val input = readInputForDayAsStringList(day)
+        fun batchesOfStringList(day: Int): List<List<String>> {
+            val input = asStringList(day)
 
             return linesToBatches(input)
         }
@@ -42,8 +42,8 @@ class InputUtil {
         }
 
         @JvmStatic
-        fun readInputForDayAsIntList(day: Int): List<Int> {
-            return readInputForDayAsStringList(day)
+        fun asIntList(day: Int): List<Int> {
+            return asStringList(day)
                     .map { s -> s.toInt() }
                     .toList()
         }
