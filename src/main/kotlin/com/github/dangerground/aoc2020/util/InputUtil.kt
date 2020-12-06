@@ -17,6 +17,24 @@ class InputUtil {
         }
 
         @JvmStatic
+        fun readBatchesForDayAsStringList(day: Int): List<List<String>> {
+            val batches = mutableListOf<List<String>>()
+
+            var tmpList = mutableListOf<String>()
+            readInputForDayAsStringList(day).forEach {
+                if (it.isEmpty()) {
+                    batches.add(tmpList)
+                    tmpList = mutableListOf<String>()
+                } else {
+                    tmpList.add(it)
+                }
+            }
+            batches.add(tmpList)
+
+            return batches
+        }
+
+        @JvmStatic
         fun readInputForDayAsIntList(day: Int): List<Int> {
             return readInputForDayAsStringList(day)
                     .map { s -> s.toInt() }
