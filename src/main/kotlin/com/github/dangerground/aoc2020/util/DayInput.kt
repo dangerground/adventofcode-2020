@@ -44,8 +44,15 @@ class DayInput {
         @JvmStatic
         fun asIntList(day: Int): List<Int> {
             return asStringList(day)
-                    .map { s -> s.toInt() }
-                    .toList()
+                .map { s -> s.toInt() }
+                .toList()
+        }
+
+        @JvmStatic
+        fun asLongList(day: Int): List<Long> {
+            return asStringList(day)
+                .map { s -> s.toLong() }
+                .toList()
         }
 
         @JvmStatic
