@@ -62,7 +62,7 @@ class DayInput {
             val resource = this::class.java.classLoader.getResource(name)
             val file = resource.file
 
-            return World(File(file).readText().lines())
+            return World(File(file).readText().lines().toMutableList())
         }
     }
 }

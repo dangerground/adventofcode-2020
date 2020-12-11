@@ -1,6 +1,7 @@
 package com.github.dangerground.aoc2020
 
 import com.github.dangerground.aoc2020.util.DayInput
+import com.github.dangerground.aoc2020.util.Direction
 import com.github.dangerground.aoc2020.util.World
 
 class Day3(private val world: World) {
@@ -24,8 +25,6 @@ class Day3(private val world: World) {
         return multiplied
     }
 }
-
-class Direction(val down: Int, val right: Int)
 
 fun main() {
     val input = DayInput.asWorld(3)
