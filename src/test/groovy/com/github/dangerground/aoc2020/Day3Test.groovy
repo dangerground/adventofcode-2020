@@ -1,5 +1,6 @@
 package com.github.dangerground.aoc2020
 
+import com.github.dangerground.aoc2020.util.Direction
 import com.github.dangerground.aoc2020.util.World
 import spock.lang.Specification
 import spock.lang.Subject
