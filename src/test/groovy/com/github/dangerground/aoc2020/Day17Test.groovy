@@ -40,6 +40,6 @@ class Day17Test extends Specification {
         def testSubject = new Day17(new World(EXAMPLE))
 
         expect:
-        testSubject.part2() == 42
+        testSubject.part2() == 848
     }
 }
