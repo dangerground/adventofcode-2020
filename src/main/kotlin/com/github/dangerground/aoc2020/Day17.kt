@@ -2,6 +2,7 @@ package com.github.dangerground.aoc2020
 
 import com.github.dangerground.aoc2020.util.DayInput
 import com.github.dangerground.aoc2020.util.World
+import kotlin.math.max
 
 fun main() {
     val process = Day17(DayInput.asWorld(17))
@@ -13,37 +14,43 @@ fun main() {
 class Day17(input: World) {
 
     var world = World3D()
-    var nextWorld = world.newEmpty()
+    var nextWorld = World3D()
 
     init {
+        val puffer = 6
         for (r in 0 until input.getRowCount()) {
             for (c in 0 until input.getColumnCount()) {
-                world.setActive(0, r, c, input.isChar(r, c, '#'))
+                world.setActive(puffer, r + puffer, c + puffer, input.isChar(r, c, '#'))
             }
         }
     }
 
     fun part1(): Int {
-        println("$world")
+        world.print()
 
-        var zRange = 1
-        var xyRange = 0
+        val puffer = 6
+        for (run in 0 until puffer) {
+            nextTick()
+            world = nextWorld
+            nextWorld = World3D()
+        }
 
-        for (z in world.zRange().first - zRange..world.zRange().last + zRange) {
-            for (y in world.yRange().first - xyRange..world.yRange().last + xyRange) {
-                for (x in world.xRange().first - xyRange..world.xRange().last + xyRange) {
+        world.print()
+
+        return world.countActive()
+    }
+
+    private fun nextTick() {
+        for (z in 0..world.maxZ + 1) {
+            for (y in 0..world.maxY + 1) {
+                for (x in 0..world.maxX + 1) {
                     val self = world.getCell(z, y, x)
                     val t = world.countActiveNeighbours(z, y, x)
                     val active = (self && (t == 2 || t == 3)) || (!self && t == 3)
-                    println("($z, $y, $x) = [$self, $t] = $active")
                     nextWorld.setActive(z, y, x, active)
                 }
             }
         }
-
-        println("$nextWorld")
-
-        return world.countActive()
     }
 
     fun part2(): Long {
@@ -53,6 +60,10 @@ class Day17(input: World) {
 
 class World3D() {
     val active = mutableMapOf<Int, MutableMap<Int, MutableMap<Int, Boolean>>>()
+
+    var maxZ = 0
+    var maxY = 0
+    var maxX = 0
 
     fun countActive(): Int {
         return active.map { (_, u) ->
@@ -66,9 +77,6 @@ class World3D() {
         var result = 0
 
         for (sz in z - 1..z + 1) {
-            if (!active.containsKey(sz)) {
-
-            }
             for (sy in y - 1..y + 1) {
                 for (sx in x - 1..x + 1) {
                     if (getCell(sz, sy, sx) && (sz != z || sy != y || sx != x)) {
@@ -82,17 +90,18 @@ class World3D() {
     }
 
     fun getCell(z: Int, y: Int, x: Int): Boolean {
-        if (!active.containsKey(z)
-            || !active[z]!!.containsKey(y)
-            || !active[z]!![y]!!.containsKey(x)
-        ) {
+
+        if (!active.containsKey(z) || !active[z]!!.containsKey(y) || !active[z]!![y]!!.containsKey(x)) {
             return false
         }
-        val value = active[z]!![y]!![x]
-        return value != null && value == true
+        return active[z]!![y]!![x]!!
     }
 
     fun setActive(z: Int, y: Int, x: Int, active: Boolean) {
+        maxZ = max(maxZ, z)
+        maxY = max(maxY, y)
+        maxX = max(maxX, x)
+
         if (!this.active.containsKey(z)) {
             this.active[z] = mutableMapOf()
         }
@@ -102,47 +111,13 @@ class World3D() {
         this.active[z]!![y]!![x] = active
     }
 
-    fun newEmpty(): World3D {
-        return World3D()
-    }
-
-    fun zRange(): IntRange {
-        val whole = active.keys
-        val zmin = whole.minOrNull()!!
-        val zmax = whole.maxOrNull()!!
-        return IntRange(zmin, zmax)
-    }
-
-    fun yRange(): IntRange {
-        val whole = active.map { (_, v) -> v.keys }
-            .reduce { l1, l2 -> mutableSetOf(l1.maxOrNull()!!, l2.maxOrNull()!!, l1.minOrNull()!!, l2.minOrNull()!!) }
-        val ymin = whole.minOrNull()!!
-        val ymax = whole.maxOrNull()!!
-        return IntRange(ymin, ymax)
-    }
-
-    fun xRange(): IntRange {
-        val whole = active.map { (_, v) ->
-            v.map { (_, v) -> v.keys }
-                .reduce { l1, l2 ->
-                    mutableSetOf(l1.maxOrNull()!!, l2.maxOrNull()!!, l1.minOrNull()!!, l2.minOrNull()!!)
-                }
-        }
-            .reduce { l1, l2 -> mutableSetOf(l1.maxOrNull()!!, l2.maxOrNull()!!, l1.minOrNull()!!, l2.minOrNull()!!) }
-        val xmin = whole.minOrNull()!!
-        val xmax = whole.maxOrNull()!!
-        return IntRange(xmin, xmax)
-    }
-
-    override fun toString(): String {
-        var result = ""
+    fun print() {
         active.forEach { (k, v) ->
-            result += "z=$k\n"
+            println("\nz=$k")
             v.forEach { (_, u) ->
-                result += "${u.map { if (it.value) '#' else '.' }.toCharArray().contentToString()}\n"
+                println(u.map { if (it.value) '#' else '.' }.toCharArray().contentToString())
             }
         }
-        return result
     }
 }
 
