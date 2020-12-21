@@ -48,6 +48,31 @@ class World(val map: MutableList<String>) {
             println(it)
         }
     }
+
+
+    fun flip() : World {
+        val newWorld = World(map.toList().toMutableList())
+        val rowCount = getRowCount() - 1
+        for (r in 0..rowCount) {
+            for (c in 0 until getColumnCount()) {
+                newWorld.setCell(rowCount - r, c, getCell(r, c)!!)
+            }
+        }
+
+        return newWorld
+    }
+
+    fun rotateLeft() : World {
+        val newWorld = World(map.toList().toMutableList())
+        val rowCount = getRowCount() - 1
+        for (r in 0 until getRowCount()) {
+            for (c in 0 until getColumnCount()) {
+                newWorld.setCell(rowCount - c, r, getCell(r, c)!!)
+            }
+        }
+
+        return newWorld
+    }
 }
 
 class Direction(val down: Int, val right: Int) {
