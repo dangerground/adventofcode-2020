@@ -36,7 +36,24 @@ class Day22Test extends Specification {
         def testSubject = new Day22(DayInput.linesToBatches(EXAMPLE))
 
         expect:
-        testSubject.part2() == "mxmxvkd,sqjhc,fvjkl"
+        testSubject.part2() == 291
+    }
+
+    def "part 2 - with infinite"() {
+        given:
+        def input = """
+            Player 1:
+            43
+            19
+            
+            Player 2:
+            2
+            29
+            14""".stripIndent().trim().lines().collect(Collectors.toList())
+        def testSubject = new Day22(DayInput.linesToBatches(input))
+
+        expect:
+        testSubject.part2() == 291
     }
 
 }
