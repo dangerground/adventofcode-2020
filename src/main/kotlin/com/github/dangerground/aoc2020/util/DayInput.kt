@@ -51,6 +51,7 @@ class DayInput {
         @JvmStatic
         fun asLongList(day: Int): List<Long> {
             return asStringList(day)
+                .filter { it.isNotEmpty() }
                 .map { s -> s.toLong() }
                 .toList()
         }
